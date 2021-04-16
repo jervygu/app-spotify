@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         
         if AuthManager.shared.isSignedIn {
+            AuthManager.shared.refreshIfNeeded(completion: nil)
             window.rootViewController = TabBarController()
         } else {
             let navVC = UINavigationController(rootViewController: WelcomeViewController())
@@ -32,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         
 //        print(AuthManager.shared.signInURL?.absoluteString)
+        
+//        Thread.sleep(forTimeInterval: 3.0) // delay lauchscreen
         
         return true
     }
