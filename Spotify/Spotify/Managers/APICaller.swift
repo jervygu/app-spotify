@@ -67,7 +67,7 @@ final class APICaller {
     }
     
     public func getNewReleases(completion: @escaping(Result<NewReleasesReponse, Error>) -> Void) {
-        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/browse/new-releases?limit=50"), withType: .GET) { (request) in
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/browse/new-releases?limit=50&country=PH"), withType: .GET) { (request) in
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -88,7 +88,7 @@ final class APICaller {
     }
     
     public func getFeaturedPlaylists(completion: @escaping(Result<FeaturedPlaylistsReponse, Error>) -> Void ) {
-        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/browse/featured-playlists?limit=50"), withType: .GET) { (request) in
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/browse/featured-playlists?limit=10"), withType: .GET) { (request) in
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
@@ -113,7 +113,7 @@ final class APICaller {
         
         // &seed_tracks=3TVXtAsR1Inumwj472S9r4&seed_artists=3TVXtAsR1Inumwj472S9r4&
         
-        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_genres=\(seeds)&limit=10"), withType: .GET) { (request) in
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_genres=\(seeds)&limit=6"), withType: .GET) { (request) in
             
 //            print(request.url?.absoluteString as Any)
             
