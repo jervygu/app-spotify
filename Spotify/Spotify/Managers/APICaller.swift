@@ -111,9 +111,9 @@ final class APICaller {
     public func getRecommendations(genres: Set<String>, completion: @escaping(Result<RecommendationsResponse, Error>) -> Void ) {
         let seeds = genres.joined(separator: ",")
         
-        // &seed_tracks=3TVXtAsR1Inumwj472S9r4
+        // &seed_tracks=3TVXtAsR1Inumwj472S9r4&seed_artists=3TVXtAsR1Inumwj472S9r4&
         
-        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_artists=3TVXtAsR1Inumwj472S9r4&seed_genres=\(seeds)&limit=10"), withType: .GET) { (request) in
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_genres=\(seeds)&limit=10"), withType: .GET) { (request) in
             
 //            print(request.url?.absoluteString as Any)
             
@@ -125,7 +125,7 @@ final class APICaller {
                 do {
 //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
-//                    print(result)
+                    print(result)
                     completion(.success(result))
                 } catch {
                     print("getRecommendations: \(error.localizedDescription)")
