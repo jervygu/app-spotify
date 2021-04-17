@@ -25,6 +25,18 @@ class HomeViewController: UIViewController {
     }
     
     private func fetchData() {
+        
+//        APICaller.shared.getCurrentUserProfile { (result) in
+//            switch result {
+//            case .success(let model):
+//                break
+//            case .failure(let error):
+//                break
+//            }
+//        }
+        
+        
+        
 //        APICaller.shared.getNewReleases { (result) in
 //            switch result {
 //            case .success(let model):
@@ -55,11 +67,11 @@ class HomeViewController: UIViewController {
                         seeds.insert(random)
                     }
                 }
-                
+
                 APICaller.shared.getRecommendations(genres: seeds) { (_) in
-                    
+
                 }
-                
+
             case .failure(let error):
                 print(error.localizedDescription)
                 break

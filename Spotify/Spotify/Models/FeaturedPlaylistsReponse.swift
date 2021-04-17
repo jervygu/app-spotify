@@ -16,18 +16,6 @@ struct PlaylistsResponse: Codable {
     let items: [Playlist]
 }
 
-struct Playlist: Codable {
-    let description: String
-    let external_urls: [String: String]
-    let id: String
-    let images: [APIImage]
-    let name: String
-    let tracks: Track
-    
-    let owner: Owner
-    
-}
-
 struct Track: Codable {
     let href: String
     let total: Int

@@ -50,6 +50,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
+    var currentUserFollowed: Int = 0
+    
+    private func fetchArtistsFollowed() {
+        APICaller.shared.getCurrentUserFollowing { [weak self] (result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let model):
+                    self?.currentUserFollowed = model.artists.total
+                case .failure(let error):
+                    print("Profile error: \(error.localizedDescription)")
+                    self?.failedToGetProfile()
+                }
+            }
+        }
+    }
+    
     private func updateUI(withModel model: UserProfile) {
         tableView.isHidden = false
         // confifure table models
@@ -57,8 +73,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         title = model.display_name
         models.append("Email: \(model.email)")
         models.append("User ID: \(model.id)")
+        models.append("Followers: \(model.followers.total)")
+//        models.append("Following: \(model.following?.artists.total)")
         models.append("Plan: \(model.product)")
-//        models.append("Plan: \(model.followers)")
         
         createHeader(with: model.images.first?.url)
         

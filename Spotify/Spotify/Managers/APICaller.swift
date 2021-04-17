@@ -43,6 +43,29 @@ final class APICaller {
         }
     }
     
+    public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingArtistsResponse, Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me/following?type=artist&limit=20"),
+                      withType: .GET
+        ){ (baseRequest) in
+            let task = URLSession.shared.dataTask(with: baseRequest) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                do {
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    let result = try JSONDecoder().decode(UserFollowingArtistsResponse.self, from: data)
+//                    print(result)
+                    completion(.success(result))
+                } catch {
+                    print("UserFollowingResponse: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
     public func getNewReleases(completion: @escaping(Result<NewReleasesReponse, Error>) -> Void) {
         createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/browse/new-releases?limit=50"), withType: .GET) { (request) in
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
@@ -85,14 +108,14 @@ final class APICaller {
         }
     }
     
-    public func getRecommendations(genres: Set<String>, completion: @escaping(Result<String, Error>) -> Void ) {
+    public func getRecommendations(genres: Set<String>, completion: @escaping(Result<RecommendationsResponse, Error>) -> Void ) {
         let seeds = genres.joined(separator: ",")
         
         // &seed_tracks=3TVXtAsR1Inumwj472S9r4
         
-        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_artists=3TVXtAsR1Inumwj472S9r4&seed_genres=\(seeds)&limit=1"), withType: .GET) { (request) in
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_artists=3TVXtAsR1Inumwj472S9r4&seed_genres=\(seeds)&limit=10"), withType: .GET) { (request) in
             
-            print(request.url?.absoluteString as Any)
+//            print(request.url?.absoluteString as Any)
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data, error == nil else {
@@ -100,9 +123,10 @@ final class APICaller {
                     return
                 }
                 do {
-                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                    print(result)
-//                    completion(.success(result))
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
+//                    print(result)
+                    completion(.success(result))
                 } catch {
                     print("getRecommendations: \(error.localizedDescription)")
                     completion(.failure(error))

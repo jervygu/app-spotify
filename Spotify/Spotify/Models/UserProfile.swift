@@ -14,14 +14,19 @@ struct UserProfile: Codable {
     let explicit_content: [String: Bool]
     let external_urls: [String: String]
     
-//    let followers: [String: Codable?]
-//    let followers: [String: Int]
+    let followers: Follower
     
     let id: String
     let product: String
     let images: [UserImage]
     
+    var following: UserFollowingArtistsResponse?
     
+    
+}
+
+struct Follower: Codable {
+    let total: Int
 }
 
 struct UserImage: Codable {
