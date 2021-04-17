@@ -1,33 +1,33 @@
 //
-//  RecommendedTrackCollectionViewCell.swift
+//  UserPlaylistsCollectionViewCell.swift
 //  Spotify
 //
 //  Created by Jeff Umandap on 4/17/21.
 //
 
 import UIKit
-import SDWebImage
 
-class RecommendedTrackCollectionViewCell: UICollectionViewCell {
-    static let identifier = "RecommendedTrackCollectionViewCell"
+class UserPlaylistsCollectionViewCell: UICollectionViewCell {
+    static let identifier = "UserPlaylistsCollectionViewCell"
+    
     
     private let playlistCoverImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "launchLogo")
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
-        imageView.layer.cornerRadius = 0
+        imageView.layer.cornerRadius = 10
         return imageView
     }()
     
-    private let trackNameLabel: UILabel = {
+    private let playlistNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         label.numberOfLines = 0
         return label
     }()
     
-    private let artistNameLabel: UILabel = {
+    private let creatorNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 10, weight: .medium)
         label.textColor = .secondaryLabel
@@ -35,17 +35,24 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
+    private let numberOfTracksLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.textColor = .white
+        label.numberOfLines = 0
+        return label
+    }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        contentView.backgroundColor = .systemBackground
+//        contentView.backgroundColor = .red
         
-        contentView.addSubview(trackNameLabel)
+        contentView.addSubview(playlistNameLabel)
         contentView.addSubview(playlistCoverImageView)
-        contentView.addSubview(artistNameLabel)
+        contentView.addSubview(creatorNameLabel)
+        contentView.addSubview(numberOfTracksLabel)
         contentView.clipsToBounds = true
-        contentView.layer.cornerRadius = 0
-        contentView.layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
@@ -58,8 +65,8 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
         let imageSize: CGFloat = contentView.width
 //        let albumLabelSize = albumNameLabel.sizeThatFits(CGSize(width: contentView.width-10, height: contentView.height-10))
         
-        trackNameLabel.sizeToFit()
-        artistNameLabel.sizeToFit()
+        playlistNameLabel.sizeToFit()
+        creatorNameLabel.sizeToFit()
         
         
         playlistCoverImageView.frame = CGRect(
@@ -69,38 +76,40 @@ class RecommendedTrackCollectionViewCell: UICollectionViewCell {
             height: imageSize)
         
         
-        trackNameLabel.frame = CGRect(
+        playlistNameLabel.frame = CGRect(
             x: 0,
             y: playlistCoverImageView.height,
             width: contentView.width,
             height: (contentView.height-imageSize)*0.66)
-//        trackNameLabel.backgroundColor = .systemTeal
+//        playlistNameLabel.backgroundColor = .systemTeal
         
         
-        artistNameLabel.frame = CGRect(
+        creatorNameLabel.frame = CGRect(
             x: 0,
-            y: trackNameLabel.bottom,
+            y: playlistNameLabel.bottom,
             width: contentView.width,
             height: (contentView.height-imageSize)*0.33)
-//        artistNameLabel.backgroundColor = .systemIndigo
+//        creatorNameLabel.backgroundColor = .systemIndigo
         
         
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        trackNameLabel.text = nil
-        artistNameLabel.text = nil
+        playlistNameLabel.text = nil
+        creatorNameLabel.text = nil
+        numberOfTracksLabel.text = nil
         playlistCoverImageView.image = nil
     }
     
-    func configure(withModel model: RecommendedTrackCellViewModel) {
-        trackNameLabel.text = model.name
-        artistNameLabel.text = "by \(model.artistName)"
+    func configure(withModel model: CurrentUserPlaylistsCellViewModel) {
+        playlistNameLabel.text = model.name
+        let songTxt = (model.numberOfTracks > 1) ? "songs" : "song"
+        creatorNameLabel.text = "by \(model.creatorName) • \(model.numberOfTracks) \(songTxt)"
+        numberOfTracksLabel.text = "\(model.numberOfTracks) \(songTxt)"
         playlistCoverImageView.sd_setImage(with: model.artworkURL, completed: nil)
         
     }
 
-    
     
 }

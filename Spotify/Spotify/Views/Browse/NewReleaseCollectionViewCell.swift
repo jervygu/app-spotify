@@ -51,6 +51,9 @@ class NewReleaseCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(artistNameLabel)
         contentView.addSubview(numberOfTracksLabel)
         contentView.clipsToBounds = true
+        contentView.layer.cornerRadius = 5.0
+        contentView.layer.masksToBounds = true
+        
     }
     
     required init?(coder: NSCoder) {
