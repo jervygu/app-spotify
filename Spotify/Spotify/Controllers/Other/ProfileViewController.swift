@@ -73,7 +73,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         title = model.display_name
         models.append("Email: \(model.email)")
         models.append("User ID: \(model.id)")
-        models.append("Followers: \(model.followers.total)")
+        
+        guard let ff = model.followers?.total else {
+            return
+        }
+        models.append("Followers: \(String(describing: ff))")
+        
 //        models.append("Following: \(model.following?.artists.total)")
         models.append("Plan: \(model.product)")
         

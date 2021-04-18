@@ -14,7 +14,7 @@ struct UserProfile: Codable {
     let explicit_content: [String: Bool]
     let external_urls: [String: String]
     
-    let followers: Follower
+    let followers: Follower?
     
     let id: String
     let product: String

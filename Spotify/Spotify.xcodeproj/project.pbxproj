@@ -47,6 +47,9 @@
 		11CEBF04262971B900BCD73C /* FeaturedPlaylistsReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF03262971B900BCD73C /* FeaturedPlaylistsReponse.swift */; };
 		11CEBF072629952700BCD73C /* RecommendationsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF062629952700BCD73C /* RecommendationsResponse.swift */; };
 		11CEBF0A2629972D00BCD73C /* RecommendationGenresResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11CEBF092629972D00BCD73C /* RecommendationGenresResponse.swift */; };
+		11F4CC7A262BA8FF00777F4F /* AlbumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F4CC79262BA8FF00777F4F /* AlbumViewController.swift */; };
+		11F4CC7D262BB8BB00777F4F /* AlbumDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F4CC7C262BB8BB00777F4F /* AlbumDetailsResponse.swift */; };
+		11F4CC81262BC2DA00777F4F /* PlaylistDetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11F4CC80262BC2DA00777F4F /* PlaylistDetailsResponse.swift */; };
 		6F82310C4A1338B570D5B478 /* Pods_Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AD0DC067B9FC4A36779B017B /* Pods_Spotify.framework */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +96,9 @@
 		11CEBF03262971B900BCD73C /* FeaturedPlaylistsReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedPlaylistsReponse.swift; sourceTree = "<group>"; };
 		11CEBF062629952700BCD73C /* RecommendationsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationsResponse.swift; sourceTree = "<group>"; };
 		11CEBF092629972D00BCD73C /* RecommendationGenresResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendationGenresResponse.swift; sourceTree = "<group>"; };
+		11F4CC79262BA8FF00777F4F /* AlbumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumViewController.swift; sourceTree = "<group>"; };
+		11F4CC7C262BB8BB00777F4F /* AlbumDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumDetailsResponse.swift; sourceTree = "<group>"; };
+		11F4CC80262BC2DA00777F4F /* PlaylistDetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistDetailsResponse.swift; sourceTree = "<group>"; };
 		45758A65EF89BA2EE2D40C50 /* Pods-Spotify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.debug.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.debug.xcconfig"; sourceTree = "<group>"; };
 		AB8E01238228C4F3A0C8E8A9 /* Pods-Spotify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Spotify.release.xcconfig"; path = "Target Support Files/Pods-Spotify/Pods-Spotify.release.xcconfig"; sourceTree = "<group>"; };
 		AD0DC067B9FC4A36779B017B /* Pods_Spotify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Spotify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -166,6 +172,8 @@
 				11CEBF062629952700BCD73C /* RecommendationsResponse.swift */,
 				11CEBF092629972D00BCD73C /* RecommendationGenresResponse.swift */,
 				11C1BBDA262AF55100032FFC /* CurrentUserPlaylistsResponse.swift */,
+				11F4CC7C262BB8BB00777F4F /* AlbumDetailsResponse.swift */,
+				11F4CC80262BC2DA00777F4F /* PlaylistDetailsResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,8 +247,9 @@
 				11893DA82627C61E008436BF /* SettingsViewController.swift */,
 				11893DAB2627C635008436BF /* ProfileViewController.swift */,
 				11893DAE2627C64A008436BF /* PlayerViewController.swift */,
-				11893DB12627C660008436BF /* PlaylistViewController.swift */,
 				11893DB42627C685008436BF /* SearchResultsViewController.swift */,
+				11F4CC79262BA8FF00777F4F /* AlbumViewController.swift */,
+				11893DB12627C660008436BF /* PlaylistViewController.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -393,9 +402,12 @@
 				11893DBE2627C6D9008436BF /* HapticsManager.swift in Sources */,
 				11893DD22627F7AC008436BF /* AuthResponse.swift in Sources */,
 				11C1BBCD262AD24300032FFC /* FeaturedPlaylistsCellViewModel.swift in Sources */,
+				11F4CC81262BC2DA00777F4F /* PlaylistDetailsResponse.swift in Sources */,
+				11F4CC7A262BA8FF00777F4F /* AlbumViewController.swift in Sources */,
 				11CEBEF12629673800BCD73C /* APIImage.swift in Sources */,
 				11893DC42627C714008436BF /* AudioTrack.swift in Sources */,
 				1162B69A2627BF9E00907305 /* HomeViewController.swift in Sources */,
+				11F4CC7D262BB8BB00777F4F /* AlbumDetailsResponse.swift in Sources */,
 				11893DA32627C5EF008436BF /* AuthViewController.swift in Sources */,
 				11CEBF04262971B900BCD73C /* FeaturedPlaylistsReponse.swift in Sources */,
 				11C1BBDB262AF55100032FFC /* CurrentUserPlaylistsResponse.swift in Sources */,

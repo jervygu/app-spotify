@@ -15,6 +15,10 @@ enum BrowseSectionType {
 }
 
 class HomeViewController: UIViewController {
+    private var newAlbums: [Album] = []
+    private var playlists: [Playlist] = []
+    private var tracks: [AudioTrack] = []
+    private var userPlaylists: [Playlist] = []
     
     private var collectionView: UICollectionView = UICollectionView(
         frame: .zero,
@@ -185,17 +189,21 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    
     private func configureModels(
         newAlbums: [Album],
         playlists: [Playlist],
         tracks: [AudioTrack],
         userPlaylists: [Playlist])
     {
-        print(newAlbums.count)
-        print(playlists.count)
-        print(tracks.count)
-        print(userPlaylists.count
-        )
+        self.newAlbums = newAlbums
+        self.playlists = playlists
+        self.tracks = tracks
+        self.userPlaylists = userPlaylists
+//        print(newAlbums.count)
+//        print(playlists.count)
+//        print(tracks.count)
+//        print(userPlaylists.count)
         
         sections.append(.newReleases(viewModels: newAlbums.compactMap({
             return NewReleasesCellViewModel(
@@ -216,7 +224,7 @@ class HomeViewController: UIViewController {
         sections.append(.recommmendedTracks(viewModels: tracks.compactMap({
             return RecommendedTrackCellViewModel(
                 name: $0.name,
-                artworkURL: URL(string: $0.album.images.first?.url ?? ""),
+                artworkURL: URL(string: $0.album?.images.first?.url ?? ""),
                 artistName: $0.artists.first?.name ?? "-"
             )
         })))
@@ -294,6 +302,33 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let viewModel = viewModels[indexPath.row]
             cell.configure(withModel: viewModel)
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let section = sections[indexPath.section]
+        
+        switch section {
+        case .newReleases(viewModels: let viewModels):
+            let album =  newAlbums[indexPath.row]
+            let vc = AlbumViewController(album: album)
+            vc.title = album.name
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .featuredPlaylists(viewModels: let viewModels):
+            let playlist =  playlists[indexPath.row]
+            let vc = PlaylistViewController(playlist: playlist)
+            vc.title = playlist.name
+            vc.navigationItem.largeTitleDisplayMode = .never
+            navigationController?.pushViewController(vc, animated: true)
+            
+        case .recommmendedTracks(viewModels: let viewModels):
+            break
+        case .currentUserPlaylists(viewModels: let viewModels):
+            break
         }
     }
     
