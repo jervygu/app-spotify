@@ -54,6 +54,7 @@ class FeaturedPlaylistsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(creatorNameLabel)
         contentView.addSubview(numberOfTracksLabel)
         contentView.clipsToBounds = true
+//        contentView.backgroundColor = .systemRed
     }
     
     required init?(coder: NSCoder) {
@@ -79,17 +80,17 @@ class FeaturedPlaylistsCollectionViewCell: UICollectionViewCell {
         
         playlistNameLabel.frame = CGRect(
             x: 0,
-            y: playlistCoverImageView.height,
+            y: playlistCoverImageView.height+5,
             width: contentView.width,
-            height: (contentView.height-imageSize)*0.66)
+            height: (contentView.height-imageSize)*0.40)
 //        playlistNameLabel.backgroundColor = .systemTeal
         
         
         creatorNameLabel.frame = CGRect(
             x: 0,
-            y: playlistNameLabel.bottom,
+            y: playlistNameLabel.bottom+5,
             width: contentView.width,
-            height: (contentView.height-imageSize)*0.33)
+            height: (contentView.height-imageSize)*0.40)
 //        creatorNameLabel.backgroundColor = .systemIndigo
         
         
