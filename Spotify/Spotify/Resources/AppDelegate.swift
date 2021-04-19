@@ -28,6 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window.rootViewController = navVC
         }
         
+        
+        // I added this line for  tabbar item color
+        UITabBar.appearance().tintColor = .label
+
+        
+        
         window.makeKeyAndVisible()
         self.window = window
         
