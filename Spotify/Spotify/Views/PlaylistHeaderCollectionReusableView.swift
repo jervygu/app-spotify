@@ -92,7 +92,7 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
-        addSubview(numberOfTracksLabel)
+//        addSubview(numberOfTracksLabel)
         addSubview(playlistCoverImageView)
         addSubview(playAllButton)
         
@@ -121,7 +121,7 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         nameLabel.frame = CGRect(
             x: 10,
             y: 25+imageSize,
-            width: width-20,
+            width: width-playAllButton.width-100,
             height: 30)
 //        nameLabel.backgroundColor = .systemPink
         
@@ -139,15 +139,15 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         ownerLabel.frame = CGRect(
             x: 10,
             y: 25+imageSize+nameLabel.height+descriptionLabel.height,
-            width: width/4,
+            width: width-20,
             height: 15)
 //        ownerLabel.backgroundColor = .systemPink
         
-        numberOfTracksLabel.frame = CGRect(
-            x: ownerLabel.right,
-            y: 25+imageSize+nameLabel.height+descriptionLabel.height,
-            width: width/4,
-            height: 15)
+//        numberOfTracksLabel.frame = CGRect(
+//            x: ownerLabel.right,
+//            y: 25+imageSize+nameLabel.height+descriptionLabel.height,
+//            width: width/4,
+//            height: 15)
 //        numberOfTracksLabel.backgroundColor = .systemBlue
         
         playAllButton.frame = CGRect(
@@ -168,8 +168,8 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         guard let total = model.total, let owner = model.ownerName else{
             return
         }
-        ownerLabel.text = "\(owner)"
-        numberOfTracksLabel.text = "• \(total) \(songTxt)"
+        ownerLabel.text = "\(owner) • \(total) \(songTxt)"
+        numberOfTracksLabel.text = ""
         playlistCoverImageView.sd_setImage(with: model.artworkURL, completed: nil)
         
         

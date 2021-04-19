@@ -1,13 +1,13 @@
 //
-//  RecommendedTrackCellViewModel.swift
+//  AlbumCollectionViewCellViewModel.swift
 //  Spotify
 //
-//  Created by Jeff Umandap on 4/17/21.
+//  Created by Jeff Umandap on 4/19/21.
 //
 
 import Foundation
 
-struct RecommendedTrackCellViewModel {
+struct AlbumCollectionViewCellViewModel {
     let name: String
     let artworkURL: URL?
     let artistName: String

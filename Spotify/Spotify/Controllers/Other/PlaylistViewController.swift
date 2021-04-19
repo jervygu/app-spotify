@@ -22,9 +22,9 @@ class PlaylistViewController: UIViewController {
                 )
             )
             item.contentInsets = NSDirectionalEdgeInsets(top: 4,
-                                                         leading: 8,
+                                                         leading: 0,
                                                          bottom: 4,
-                                                         trailing: 8)
+                                                         trailing: 0)
             
             // Group
             let group = NSCollectionLayoutGroup.vertical(
@@ -34,13 +34,15 @@ class PlaylistViewController: UIViewController {
                 ),
                 subitem: item,
                 count: 1)
+            group.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8)
             
             // Section
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 4,
-                                                            leading: 0,
-                                                            bottom: 4,
-                                                            trailing: 0)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 0,
+                leading: 0,
+                bottom: 0,
+                trailing: 0)
             
             section.boundarySupplementaryItems = [
                 NSCollectionLayoutBoundarySupplementaryItem(
@@ -86,6 +88,8 @@ class PlaylistViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = .systemBackground
+        collectionView.showsVerticalScrollIndicator = false
         
         
         APICaller.shared.getPlaylistDetails(withPlaylist: playlist) { [weak self] (result) in
@@ -97,7 +101,8 @@ class PlaylistViewController: UIViewController {
                         RecommendedTrackCellViewModel(
                             name: $0.track.name,
                             artworkURL: URL(string: $0.track.album?.images.first?.url  ?? ""),
-                            artistName: $0.track.artists.first?.name ?? "")
+                            artistName: $0.track.artists.first?.name ?? "",
+                            track_number: $0.track.track_number)
                     })
                     self?.collectionView.reloadData()
                 case .failure(let error):
@@ -132,8 +137,6 @@ class PlaylistViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         collectionView.frame = view.bounds
-        collectionView.backgroundColor = .systemBackground
-        collectionView.showsVerticalScrollIndicator = false
         
     }
     
@@ -203,6 +206,4 @@ extension PlaylistViewController: PlaylistHeaderCollectionReusableViewDelegate {
         // start play all in queue
         print("play all")
     }
-    
-    
 }

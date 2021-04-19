@@ -12,6 +12,20 @@ enum BrowseSectionType {
     case featuredPlaylists(viewModels: [FeaturedPlaylistsCellViewModel]) // 1
     case recommmendedTracks(viewModels: [RecommendedTrackCellViewModel]) // 2
     case currentUserPlaylists(viewModels: [CurrentUserPlaylistsCellViewModel]) // 3
+    
+    var title: String {
+        switch self {
+        case .newReleases:
+            return "New Releases for you"
+        case .featuredPlaylists:
+            return "Featured playlists"
+        case .recommmendedTracks:
+            return "Recommended tracks"
+        case .currentUserPlaylists:
+            return "Your playlists"
+        }
+    }
+    
 }
 
 class HomeViewController: UIViewController {
@@ -65,6 +79,12 @@ class HomeViewController: UIViewController {
         collectionView.register(NewReleaseCollectionViewCell.self, forCellWithReuseIdentifier: NewReleaseCollectionViewCell.identifier)
         collectionView.register(FeaturedPlaylistsCollectionViewCell.self, forCellWithReuseIdentifier: FeaturedPlaylistsCollectionViewCell.identifier)
         collectionView.register(RecommendedTrackCollectionViewCell.self, forCellWithReuseIdentifier: RecommendedTrackCollectionViewCell.identifier)
+        
+        
+        collectionView.register(
+            TitleHeaderCollectionReusableView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: TitleHeaderCollectionReusableView.identifier)
         
         
         collectionView.register(UserPlaylistsCollectionViewCell.self, forCellWithReuseIdentifier: UserPlaylistsCollectionViewCell.identifier)
@@ -225,7 +245,8 @@ class HomeViewController: UIViewController {
             return RecommendedTrackCellViewModel(
                 name: $0.name,
                 artworkURL: URL(string: $0.album?.images.first?.url ?? ""),
-                artistName: $0.artists.first?.name ?? "-"
+                artistName: $0.artists.first?.name ?? "-",
+                track_number: $0.track_number
             )
         })))
         sections.append(.currentUserPlaylists(viewModels: userPlaylists.compactMap({
@@ -332,8 +353,34 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        guard let header = collectionView.dequeueReusableSupplementaryView(
+                ofKind: kind,
+                withReuseIdentifier: TitleHeaderCollectionReusableView.identifier,
+                for: indexPath) as? TitleHeaderCollectionReusableView, kind == UICollectionView.elementKindSectionHeader else {
+            return UICollectionReusableView()
+        }
+        let section = indexPath.section
+        let modelTitle = sections[section].title
+        
+        header.configure(withTitle: modelTitle)
+        return header
+        
+    }
+    
     
     static func createSectionLayout(section: Int) -> NSCollectionLayoutSection {
+        let supplementaryViews = [
+            NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1.0),
+                    heightDimension: .absolute(40)
+                ),
+                elementKind: UICollectionView.elementKindSectionHeader,
+                alignment: .top
+            )
+        ]
+        
         switch section {
         case 0:
             
@@ -371,10 +418,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             // Section
             let section = NSCollectionLayoutSection(group: horizontalGroup)
             section.orthogonalScrollingBehavior = .groupPaging
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2.5,
-                                                            leading: 5,
-                                                            bottom: 2.5,
-                                                            trailing: 5)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 2.5,
+                leading: 5,
+                bottom: 2.5,
+                trailing: 5)
+            
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         case 1:
             
@@ -412,10 +462,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             // Section
             let section = NSCollectionLayoutSection(group: horizontalGroup)
             section.orthogonalScrollingBehavior = .continuous
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2.5,
-                                                            leading: 5,
-                                                            bottom: 2.5,
-                                                            trailing: 5)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 2.5,
+                leading: 5,
+                bottom: 2.5,
+                trailing: 5)
+            
+            section.boundarySupplementaryItems = supplementaryViews
             return section
             
         case 2:
@@ -427,10 +480,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     heightDimension: .fractionalHeight(1.0)
                 )
             )
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5,
-                                                         leading: 5,
-                                                         bottom: 5,
-                                                         trailing: 5)
+            item.contentInsets = NSDirectionalEdgeInsets(
+                top: 5,
+                leading: 5,
+                bottom: 5,
+                trailing: 5)
             
             // Group
             // vertical group inside horizontal group
@@ -446,10 +500,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             // Section
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2.5,
-                                                            leading: 5,
-                                                            bottom: 2.5,
-                                                            trailing: 5)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 2.5,
+                leading: 5,
+                bottom: 2.5,
+                trailing: 5)
+            
+            section.boundarySupplementaryItems = supplementaryViews
             return section
             
         case 3:
@@ -461,10 +518,11 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                     heightDimension: .fractionalHeight(1.0)
                 )
             )
-            item.contentInsets = NSDirectionalEdgeInsets(top: 5,
-                                                         leading: 5,
-                                                         bottom: 5,
-                                                         trailing: 5)
+            item.contentInsets = NSDirectionalEdgeInsets(
+                top: 5,
+                leading: 5,
+                bottom: 5,
+                trailing: 5)
             
             // Group
             // vertical group inside horizontal group
@@ -480,10 +538,13 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             // Section
             let section = NSCollectionLayoutSection(group: group)
             section.orthogonalScrollingBehavior = .continuous
-            section.contentInsets = NSDirectionalEdgeInsets(top: 2.5,
-                                                            leading: 5,
-                                                            bottom: 2.5,
-                                                            trailing: 5)
+            section.contentInsets = NSDirectionalEdgeInsets(
+                top: 2.5,
+                leading: 5,
+                bottom: 2.5,
+                trailing: 5)
+            
+            section.boundarySupplementaryItems = supplementaryViews
             return section
             
             
@@ -508,6 +569,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             
             // Section
             let section = NSCollectionLayoutSection(group: group)
+            
+            section.boundarySupplementaryItems = supplementaryViews
             return section
         }
     }
