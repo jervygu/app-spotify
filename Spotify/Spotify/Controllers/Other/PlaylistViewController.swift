@@ -120,7 +120,7 @@ class PlaylistViewController: UIViewController {
     
     @objc private func didTapShareButton(){
         // share
-        print(playlist.external_urls)
+        print("Share playlist: \(playlist.external_urls)")
         guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else {
             return
         }

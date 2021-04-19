@@ -98,8 +98,10 @@ class AlbumViewController: UIViewController {
                             name: $0.name,
                             artworkURL: URL(string: $0.album?.images.first?.url ?? ""),
                             artistName: $0.artists.first?.name ?? "-",
-                            track_number: $0.track_number
-                            )
+                            track_number: $0.track_number,
+                            
+                            external_urls: $0.external_urls
+                        )
                     })
                     self?.collectionView.reloadData()
                 case .failure(let error):
@@ -109,27 +111,27 @@ class AlbumViewController: UIViewController {
             }
         }
         
-        //        navigationItem.rightBarButtonItem = UIBarButtonItem(
-        //            barButtonSystemItem: .action,
-        //            target: self,
-        //            action: #selector(didTapShareButton))
+                navigationItem.rightBarButtonItem = UIBarButtonItem(
+                    barButtonSystemItem: .action,
+                    target: self,
+                    action: #selector(didTapShareButton))
         
     }
     
     
-    //@objc private func didTapShareButton(){
-    //    // share
-    //    print(playlist.external_urls)
-    //    guard let url = URL(string: playlist.external_urls["spotify"] ?? "") else {
-    //        return
-    //    }
-    //
-    //    let vc = UIActivityViewController(
-    //        activityItems: [url],
-    //        applicationActivities: [])
-    //    vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-    //    present(vc, animated: true, completion: nil)
-    //}
+    @objc private func didTapShareButton(){
+        // share
+        print("Share album: \(album.external_urls)")
+        guard let url = URL(string: album.external_urls["spotify"] ?? "") else {
+            return
+        }
+    
+        let vc = UIActivityViewController(
+            activityItems: [url],
+            applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true, completion: nil)
+    }
     
     
     

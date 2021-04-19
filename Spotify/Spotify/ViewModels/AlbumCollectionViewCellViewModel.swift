@@ -12,4 +12,7 @@ struct AlbumCollectionViewCellViewModel {
     let artworkURL: URL?
     let artistName: String
     let track_number: Int?
+    
+    let external_urls: [String: String]?
+//    let total: Int?
 }
