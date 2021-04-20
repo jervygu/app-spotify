@@ -23,7 +23,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        view.backgroundColor = .systemRed
         
         view.addSubview(tableView)
         tableView.delegate = self
@@ -38,7 +38,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
     func update(withResults results: [SearchResult]) {
         self.results = results
         tableView.reloadData()
-        tableView.isHidden = false
+        tableView.isHidden = !results.isEmpty
     }
     
     
@@ -55,7 +55,7 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = "Eminem"
         
-        return cell
+        return cell 
         
     }
     
