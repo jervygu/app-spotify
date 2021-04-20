@@ -9,18 +9,6 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchResultsUpdating {
     
-    // test genres
-    private let genreArray: [String] = [
-        "Hip Hop",
-        "Pop",
-        "Dance/ Electronic",
-        "Jazz",
-        "Blues",
-        "Rock",
-        "Reggae",
-        "Deatch Metal"
-    ]
-    
     let searchController: UISearchController = {
         let vc = UISearchController(searchResultsController: SearchResultsViewController())
         vc.searchBar.placeholder = "Songs, artists, albums"
@@ -66,6 +54,8 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         }))
     
     // MARK: - LifeCycle
+    
+    private var categories = [Category]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,12 +67,30 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
         view.addSubview(collectionView)
         
         collectionView.register(
-            GenreCollectionViewCell.self,
-            forCellWithReuseIdentifier: GenreCollectionViewCell.identifer)
+            CategoryCollectionViewCell.self,
+            forCellWithReuseIdentifier: CategoryCollectionViewCell.identifer)
         
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .systemBackground
+        
+        
+        
+        // Categories
+        APICaller.shared.getCategories { [weak self](result) in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let categories):
+//                    let first = categories.first!
+                    self?.categories = categories
+                    self?.collectionView.reloadData()
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    break
+                }
+            }
+        }
         
     }
     
@@ -107,28 +115,39 @@ class SearchViewController: UIViewController, UISearchResultsUpdating {
     }
 }
 
-
+ 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return  1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return categories.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: GenreCollectionViewCell.identifer,
-                for: indexPath) as? GenreCollectionViewCell else {
+                withReuseIdentifier: CategoryCollectionViewCell.identifer,
+                for: indexPath) as? CategoryCollectionViewCell else {
             return UICollectionViewCell()
         }
         
+        let category = categories[indexPath.row]
         
-        
-        cell.configure(withTitle: genreArray.randomElement() ?? "")
+        cell.configure(withModel: CategoryCollectionViewCellViewModel(
+                        title: category.name,
+                        icons: URL(string: category.icons.first?.url ?? "")))
         
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
+        
+        let category = categories[indexPath.row]
+        let vc = CategoryViewController(category: category)
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     

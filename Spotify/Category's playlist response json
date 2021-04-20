@@ -1,0 +1,87 @@
+
+category playlist response
+
+{
+    playlists =     {
+        href = "https://api.spotify.com/v1/browse/categories/toplists/playlists?country=PH&offset=0&limit=2";
+        items =         (
+                        {
+                collaborative = 0;
+                description = "Best tracks from the world of OPM and pop. Cover: Zack Tabudlo";
+                "external_urls" =                 {
+                    spotify = "https://open.spotify.com/playlist/37i9dQZF1DXcZQSjptOQtk";
+                };
+                href = "https://api.spotify.com/v1/playlists/37i9dQZF1DXcZQSjptOQtk";
+                id = 37i9dQZF1DXcZQSjptOQtk;
+                images =                 (
+                                        {
+                        height = "<null>";
+                        url = "https://i.scdn.co/image/ab67706f0000000334bb2b8a34f9f003b1d335f8";
+                        width = "<null>";
+                    }
+                );
+                name = "Hot Hits Philippines";
+                owner =                 {
+                    "display_name" = Spotify;
+                    "external_urls" =                     {
+                        spotify = "https://open.spotify.com/user/spotify";
+                    };
+                    href = "https://api.spotify.com/v1/users/spotify";
+                    id = spotify;
+                    type = user;
+                    uri = "spotify:user:spotify";
+                };
+                "primary_color" = "<null>";
+                public = "<null>";
+                "snapshot_id" = MTYxODQ0NjA5MywwMDAwMDE1MDAwMDAwMTc4ZDJlNzhkYmQwMDAwMDE3OGNlOTkwNzY1;
+                tracks =                 {
+                    href = "https://api.spotify.com/v1/playlists/37i9dQZF1DXcZQSjptOQtk/tracks";
+                    total = 51;
+                };
+                type = playlist;
+                uri = "spotify:playlist:37i9dQZF1DXcZQSjptOQtk";
+            },
+                        {
+                collaborative = 0;
+                description = "100% Pinoy hits from your favorite artists!";
+                "external_urls" =                 {
+                    spotify = "https://open.spotify.com/playlist/37i9dQZF1DX4olOMiqFeqU";
+                };
+                href = "https://api.spotify.com/v1/playlists/37i9dQZF1DX4olOMiqFeqU";
+                id = 37i9dQZF1DX4olOMiqFeqU;
+                images =                 (
+                                        {
+                        height = "<null>";
+                        url = "https://i.scdn.co/image/ab67706f00000003686604cfc2467f94dfcd8e3a";
+                        width = "<null>";
+                    }
+                );
+                name = "OPM Favorites";
+                owner =                 {
+                    "display_name" = Spotify;
+                    "external_urls" =                     {
+                        spotify = "https://open.spotify.com/user/spotify";
+                    };
+                    href = "https://api.spotify.com/v1/users/spotify";
+                    id = spotify;
+                    type = user;
+                    uri = "spotify:user:spotify";
+                };
+                "primary_color" = "<null>";
+                public = "<null>";
+                "snapshot_id" = MTYxODg3ODQxMywwMDAwMDAwMGQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0Mjdl;
+                tracks =                 {
+                    href = "https://api.spotify.com/v1/playlists/37i9dQZF1DX4olOMiqFeqU/tracks";
+                    total = 50;
+                };
+                type = playlist;
+                uri = "spotify:playlist:37i9dQZF1DX4olOMiqFeqU";
+            }
+        );
+        limit = 2;
+        next = "https://api.spotify.com/v1/browse/categories/toplists/playlists?country=PH&offset=2&limit=2";
+        offset = 0;
+        previous = "<null>";
+        total = 15;
+    };
+}

@@ -1,14 +1,15 @@
 //
-//  GenreCollectionViewCell.swift
+//  CategoryCollectionViewCell.swift
 //  Spotify
 //
 //  Created by Jeff Umandap on 4/19/21.
 //
 
 import UIKit
+import SDWebImage
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-    static let identifer = "GenreCollectionViewCell"
+    static let identifer = "CategoryCollectionViewCell"
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,13 +20,16 @@ class CategoryCollectionViewCell: UICollectionViewCell {
             withConfiguration: UIImage.SymbolConfiguration(
                 pointSize: 50,
                 weight: .regular))
+        
+        imageView.transform = CGAffineTransform(rotationAngle: 0.436332537394482)
+        
         return imageView
     }()
     
     private let genrelabel: UILabel = {
         let label = UILabel()
         label.textColor = .label
-        label.font = .systemFont(ofSize: 15, weight: .bold)
+        label.font = .systemFont(ofSize: 13, weight: .bold)
         label.numberOfLines = 0
         return label
     }()
@@ -61,6 +65,11 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         genrelabel.text = nil
+        imageView.image = UIImage(
+            systemName: "music.quarternote.3",
+            withConfiguration: UIImage.SymbolConfiguration(
+                pointSize: 50,
+                weight: .regular))
         
     }
     
@@ -70,25 +79,30 @@ class CategoryCollectionViewCell: UICollectionViewCell {
         genrelabel.frame = CGRect(
             x: 10,
             y: 0,
-            width: (contentView.width/2)-10,
+            width: (contentView.width/1.6),
             height: contentView.height/2)
 //        genrelabel.backgroundColor = .black
         
-        let imageSize = contentView.width/2
+        let imageSize = contentView.width/2.8
         
         imageView.frame = CGRect(
-            x: (contentView.width/2),
-            y: 20,
+            x: (contentView.width/1.40),
+            y: contentView.height-imageSize,
             width: imageSize,
-            height: imageSize-20)
+            height: imageSize)
 //        imageView.backgroundColor = .red
         
     }
     
-    func configure(withTitle title: String) {
-        genrelabel.text = title
+    func configure(withModel model: CategoryCollectionViewCellViewModel) {
+        genrelabel.text = model.title
+        imageView.sd_setImage(with: model.icons, completed: nil)
+        
+        
         contentView.backgroundColor = colors.randomElement()
         
     }
     
+    
 }
+
