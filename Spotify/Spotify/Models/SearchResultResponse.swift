@@ -8,7 +8,7 @@
 import Foundation
 
 struct SearchResultResponse: Codable {
-    let ablums: SearchAlbumResponse
+    let albums: SearchAlbumResponse
     let artists: SearchArtistResponse
     let playlists: SearchPlaylistsResponse
     let tracks: SearchTracksResponse

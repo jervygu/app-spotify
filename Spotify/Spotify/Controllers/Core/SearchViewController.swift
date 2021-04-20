@@ -67,7 +67,7 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchB
         
         
         navigationItem.searchController = searchController
-        
+          
         view.addSubview(collectionView)
         
         collectionView.register(
