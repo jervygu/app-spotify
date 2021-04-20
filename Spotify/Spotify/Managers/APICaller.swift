@@ -304,7 +304,7 @@ final class APICaller {
     public func search(withQuery query: String, completion: @escaping(Result<[SearchResult], Error>) -> Void) {
         createRequest(
             withUrl: URL(
-                string: Constants.baseAPIUrl + "/search?limit=2&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), withType: .GET) { (request) in
+                string: Constants.baseAPIUrl + "/search?limit=10&type=album,artist,playlist,track&q=\(query.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")"), withType: .GET) { (request) in
             
             print(request.url?.absoluteString ?? "none")
             
@@ -322,8 +322,6 @@ final class APICaller {
                     searchResults.append(contentsOf: result.albums.items.compactMap({ SearchResult.album(model: $0 )}))
                     searchResults.append(contentsOf: result.artists.items.compactMap({ SearchResult.artist(model: $0 )}))
                     searchResults.append(contentsOf: result.playlists.items.compactMap({ SearchResult.playlist(model: $0) }))
-                    
-                    
                     
                     print("searchResults: \(searchResults)")
                     completion(.success(searchResults))
