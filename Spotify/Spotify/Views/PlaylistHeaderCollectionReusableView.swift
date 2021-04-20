@@ -72,23 +72,29 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         return button
     }()
     
+    private let bgView: UIView = {
+        let view = UIView()
+        view.clipsToBounds = true
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    private let gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.random().cgColor, UIColor.systemBackground]
+        return gradient
+    }()
+    
     // MARK:- Init
     
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-//        backgroundColor = .red
+//        backgroundColor = .systemBackground
         
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: frame.height*0.95))
-        let gradient = CAGradientLayer()
-
-        gradient.frame = view.bounds
-//        gradient.colors = [UIColor.white.cgColor, UIColor.black.cgColor]
-        gradient.colors = [UIColor.systemGreen.cgColor, UIColor.systemBackground]
-
-        view.layer.insertSublayer(gradient, at: 0)
+        addSubview(bgView)
+        layer.addSublayer(gradient)
         
-        addSubview(view)
         addSubview(nameLabel)
         addSubview(descriptionLabel)
         addSubview(ownerLabel)
@@ -110,6 +116,12 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        bgView.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height*1.3)
+        gradient.frame = bgView.bounds
+        bgView.layer.insertSublayer(gradient, at: 0)
+//        bgView.backgroundColor = .red
+        
         
         let imageSize: CGFloat = width/1.8
         playlistCoverImageView.frame = CGRect(
@@ -176,3 +188,23 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
     }
     
 }
+
+
+extension CGFloat {
+    static func random() -> CGFloat {
+        return CGFloat(arc4random()) / CGFloat(UInt32.max)
+    }
+}
+
+extension UIColor {
+    static func random() -> UIColor {
+        return UIColor(
+           red:   .random(),
+           green: .random(),
+           blue:  .random(),
+           alpha: 1.0
+        )
+    }
+}
+
+
