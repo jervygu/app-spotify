@@ -133,6 +133,8 @@ class SearchViewController: UIViewController, UISearchResultsUpdating, UISearchB
 }
 
 extension SearchViewController: SearchResultsViewControllerDelegate {
+    
+    
     func didTapResult(_ result: SearchResult) {
         switch result {
         case .album(let model):
@@ -144,8 +146,13 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
             guard let url = URL(string: model.external_urls["spotify"] ?? "") else {
                 return 
             }
-            let vc = SFSafariViewController(url: url)
+            
+//            let vc = SFSafariViewController(url: url)
+//            present(vc, animated: true, completion: nil)
+            let vc = WebViewController()
+            vc.artistURL = url
             present(vc, animated: true, completion: nil)
+        
         case .playlist(let model):
             let vc = PlaylistViewController(playlist: model)
             vc.navigationItem.largeTitleDisplayMode =  .never
