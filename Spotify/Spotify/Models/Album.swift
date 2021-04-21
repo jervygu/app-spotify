@@ -18,4 +18,6 @@ struct Album: Codable {
     let total_tracks: Int
     let artists: [Artist]
     let external_urls: [String: String]
+    
+    let type: String
 }

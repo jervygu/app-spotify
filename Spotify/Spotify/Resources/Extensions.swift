@@ -45,6 +45,12 @@ extension DateFormatter {
         dateFormatter.dateStyle = .medium
         return dateFormatter
     }()
+    
+    static let displayDateFormatterShort: DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .short
+        return dateFormatter
+    }()
 }
 
 extension String {
@@ -53,6 +59,13 @@ extension String {
             return string
         }
         return DateFormatter.displayDateFormatter.string(from: date)
+    }
+    
+    static func formattedDateShort(string: String) -> String {
+        guard let date = DateFormatter.dateFormatter.date(from: string) else {
+            return string
+        }
+        return DateFormatter.displayDateFormatterShort.string(from: date)
     }
 }
 

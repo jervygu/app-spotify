@@ -16,4 +16,6 @@ struct Playlist: Codable {
     let name: String
     let owner: Owner
     let tracks: Track
+    
+    let type: String
 }
