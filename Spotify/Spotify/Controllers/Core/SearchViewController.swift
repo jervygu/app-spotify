@@ -151,14 +151,18 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
 //            present(vc, animated: true, completion: nil)
             let vc = WebViewController()
             vc.artistURL = url
-            present(vc, animated: true, completion: nil)
+//            present(vc, animated: true, completion: nil)
+            vc.navigationItem.largeTitleDisplayMode =  .never
+            vc.title = model.name
+            navigationController?.pushViewController(vc, animated: true)
+            
         
         case .playlist(let model):
             let vc = PlaylistViewController(playlist: model)
             vc.navigationItem.largeTitleDisplayMode =  .never
             navigationController?.pushViewController(vc, animated: true)
         case .track(let model):
-            break
+            PlaybackPresenter.startPlayback(fromVC: self, track: model)
         }
     }
 }
