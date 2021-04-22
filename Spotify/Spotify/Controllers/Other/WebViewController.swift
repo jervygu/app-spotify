@@ -22,6 +22,7 @@ class WebViewController: UIViewController, WKUIDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         
 //        let myURL = URL(string:"https://www.apple.com")
         guard let myURL = artistURL else {

@@ -23,4 +23,6 @@ struct AudioTrack: Codable {
     let track_number: Int
     let type: String
     
+    let preview_url: String?
+    
 }
