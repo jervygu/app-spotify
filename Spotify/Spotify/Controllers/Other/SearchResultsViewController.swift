@@ -132,8 +132,11 @@ class SearchResultsViewController: UIViewController, UITableViewDelegate, UITabl
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultDefaultTableViewCell.identifier, for: indexPath) as? SearchResultDefaultTableViewCell else {
                 return UITableViewCell()
             }
+            
+            let type = artist.type
             let viewModel = SearchResultDefaultTableViewCellViewModel(
                 title: artist.name,
+                type: type.capitalizingFirstLetter(),
                 imageURL: URL(string: artist.images?.first?.url ?? ""))
              
             cell.configure(withViewModel: viewModel)

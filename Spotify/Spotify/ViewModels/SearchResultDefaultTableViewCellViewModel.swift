@@ -9,5 +9,6 @@ import Foundation
 
 struct SearchResultDefaultTableViewCellViewModel {
     let title: String
+    let type: String
     let imageURL: URL?
 }

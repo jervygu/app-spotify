@@ -18,6 +18,14 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         return label
     }()
     
+    private let subLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.font = .systemFont(ofSize: 10, weight: .light)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -30,6 +38,7 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         backgroundColor = .systemBackground
         
         contentView.addSubview(label)
+        contentView.addSubview(subLabel)
         contentView.addSubview(iconImageView)
         contentView.clipsToBounds = true
         accessoryType = .disclosureIndicator
@@ -51,13 +60,30 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         iconImageView.layer.cornerRadius = imageSize/2
         iconImageView.layer.masksToBounds = true
         
-        let labelHeight = contentView.height
+//        let labelHeight = contentView.height
+//        label.frame = CGRect(
+//            x: iconImageView.right+15,
+//            y: 0,
+//            width: contentView.width-iconImageView.width-50,
+//            height: labelHeight)
+//        label.backgroundColor = .systemOrange
+        
+        label.sizeToFit()
+        let labelHeight = contentView.height/4
         label.frame = CGRect(
             x: iconImageView.right+15,
-            y: 0,
+            y: contentView.height * 0.25,
             width: contentView.width-iconImageView.width-50,
             height: labelHeight)
-//        label.backgroundColor = .systemOrange
+//        label.backgroundColor = .darkGray
+        
+        subLabel.sizeToFit()
+        subLabel.frame = CGRect(
+            x: iconImageView.right+15,
+            y: contentView.height * 0.5,
+            width: contentView.width-iconImageView.width-50,
+            height: labelHeight)
+//        subTitlelabel.backgroundColor = .brown
         
     }
     
@@ -65,12 +91,15 @@ class SearchResultDefaultTableViewCell: UITableViewCell {
         super.prepareForReuse()
         iconImageView.image = nil
         label.text = nil
+        subLabel.text = nil
         
     }
     
     func configure(withViewModel viewModel: SearchResultDefaultTableViewCellViewModel) {
         label.text = viewModel.title
+        subLabel.text = viewModel.type
         iconImageView.sd_setImage(with: viewModel.imageURL, completed: nil)
+
     }
     
 }
