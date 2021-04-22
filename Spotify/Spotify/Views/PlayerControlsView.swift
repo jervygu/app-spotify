@@ -46,7 +46,7 @@ final class PlayerControlsView: UIView {
         let image = UIImage(
             systemName: "backward.end.fill",
             withConfiguration: UIImage.SymbolConfiguration(
-                pointSize: 25,
+                pointSize: 30,
                 weight: .ultraLight))
         button.setImage(image, for: .normal)
         return button
@@ -58,7 +58,7 @@ final class PlayerControlsView: UIView {
         let image = UIImage(
             systemName: "forward.end.fill",
             withConfiguration: UIImage.SymbolConfiguration(
-                pointSize: 25,
+                pointSize: 30,
                 weight: .ultraLight))
         button.setImage(image, for: .normal)
         return button
@@ -138,10 +138,26 @@ final class PlayerControlsView: UIView {
             height: 44)
         
         let buttonSize: CGFloat = 60
-        playPauseButton.frame = CGRect(x: (width-buttonSize)/2, y: (width-buttonSize)/2+30, width: buttonSize, height: buttonSize)
+        playPauseButton.frame = CGRect(
+            x: (width-buttonSize)/2,
+            y: (width-buttonSize)/2+30,
+            width: buttonSize,
+            height: buttonSize)
+//        playPauseButton.backgroundColor = .systemPink
         
-        backButton.frame = CGRect(x: playPauseButton.left-40-buttonSize, y: (width-buttonSize)/2+30, width: buttonSize, height: buttonSize)
-        nextButton.frame = CGRect(x: playPauseButton.right+40, y: (width-buttonSize)/2+30, width: buttonSize, height: buttonSize)
+        backButton.frame = CGRect(
+            x: playPauseButton.left-40-buttonSize,
+            y: (width-buttonSize)/2+30,
+            width: buttonSize,
+            height: buttonSize)
+//        backButton.backgroundColor = .systemPink
+        
+        nextButton.frame = CGRect(
+            x: playPauseButton.right+40,
+            y: (width-buttonSize)/2+30,
+            width: buttonSize,
+            height: buttonSize)
+//        nextButton.backgroundColor = .systemPink
         
         
         

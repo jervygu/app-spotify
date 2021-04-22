@@ -20,9 +20,21 @@ class PlayerViewController: UIViewController {
     }()
     
     private let controlsView = PlayerControlsView()
+    
+    private let gradient: CAGradientLayer = {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIColor.random().cgColor, UIColor.systemBackground]
+        return gradient
+    }()
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.layer.addSublayer(gradient)
+        
+        
         
         view.backgroundColor = .systemBackground
         view.addSubview(imageView)
@@ -30,10 +42,22 @@ class PlayerViewController: UIViewController {
         controlsView.delegate = self
         configureBarButtons()
         
+        
+        
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
+        // gradient
+        
+        view.frame = CGRect(x: 0, y: 0, width: view.width, height: view.height)
+        gradient.frame = view.bounds
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        
+        
+        
      
         let imageSize = view.width/1.2
         imageView.frame = CGRect(
