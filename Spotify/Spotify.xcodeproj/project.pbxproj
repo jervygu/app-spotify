@@ -21,6 +21,9 @@
 		11283DA3262FDA2100CEDB4E /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11283DA2262FDA2100CEDB4E /* WebViewController.swift */; };
 		112CC97D263130FE00E848D6 /* PlaybackPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC97C263130FE00E848D6 /* PlaybackPresenter.swift */; };
 		112CC98F263148FC00E848D6 /* PlayerControlsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 112CC98E263148FC00E848D6 /* PlayerControlsView.swift */; };
+		1132CCC926326A1B007F7680 /* LibraryPlaylistsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132CCC826326A1B007F7680 /* LibraryPlaylistsViewController.swift */; };
+		1132CCCC26326A50007F7680 /* LibraryAlbumsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132CCCB26326A50007F7680 /* LibraryAlbumsViewController.swift */; };
+		1132CCCF2632714F007F7680 /* LibraryToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1132CCCE2632714F007F7680 /* LibraryToggleView.swift */; };
 		1162B6962627BF9E00907305 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1162B6952627BF9E00907305 /* AppDelegate.swift */; };
 		1162B6982627BF9E00907305 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1162B6972627BF9E00907305 /* SceneDelegate.swift */; };
 		1162B69A2627BF9E00907305 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1162B6992627BF9E00907305 /* HomeViewController.swift */; };
@@ -90,6 +93,9 @@
 		11283DA2262FDA2100CEDB4E /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		112CC97C263130FE00E848D6 /* PlaybackPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackPresenter.swift; sourceTree = "<group>"; };
 		112CC98E263148FC00E848D6 /* PlayerControlsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerControlsView.swift; sourceTree = "<group>"; };
+		1132CCC826326A1B007F7680 /* LibraryPlaylistsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryPlaylistsViewController.swift; sourceTree = "<group>"; };
+		1132CCCB26326A50007F7680 /* LibraryAlbumsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryAlbumsViewController.swift; sourceTree = "<group>"; };
+		1132CCCE2632714F007F7680 /* LibraryToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryToggleView.swift; sourceTree = "<group>"; };
 		1162B6922627BF9E00907305 /* Spotify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spotify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1162B6952627BF9E00907305 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1162B6972627BF9E00907305 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -186,6 +192,15 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		1132CCC7263269F8007F7680 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				1132CCC826326A1B007F7680 /* LibraryPlaylistsViewController.swift */,
+				1132CCCB26326A50007F7680 /* LibraryAlbumsViewController.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		1162B6892627BF9E00907305 = {
 			isa = PBXGroup;
 			children = (
@@ -264,6 +279,7 @@
 				11AE3C46262D076F008D3293 /* TitleHeaderCollectionReusableView.swift */,
 				11AE3C49262D1FD2008D3293 /* AlbumTrackCollectionViewCell.swift */,
 				112CC98E263148FC00E848D6 /* PlayerControlsView.swift */,
+				1132CCCE2632714F007F7680 /* LibraryToggleView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -320,6 +336,7 @@
 		11893DA12627C5CE008436BF /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				1132CCC7263269F8007F7680 /* Library */,
 				11893DA22627C5EF008436BF /* AuthViewController.swift */,
 				11893DA52627C600008436BF /* WelcomeViewController.swift */,
 				11893DA82627C61E008436BF /* SettingsViewController.swift */,
@@ -487,6 +504,7 @@
 				11893DB52627C685008436BF /* SearchResultsViewController.swift in Sources */,
 				11122E3B262E7F6B003CF138 /* CategoryPlaylistCellViewModel.swift in Sources */,
 				11893DA62627C600008436BF /* WelcomeViewController.swift in Sources */,
+				1132CCCF2632714F007F7680 /* LibraryToggleView.swift in Sources */,
 				11AE3C4D262D33DC008D3293 /* AlbumCollectionViewCellViewModel.swift in Sources */,
 				11CEBEEE262963BD00BCD73C /* NewReleasesReponse.swift in Sources */,
 				11893DAC2627C635008436BF /* ProfileViewController.swift in Sources */,
@@ -499,8 +517,10 @@
 				11122E2E262E4D2F003CF138 /* AllCategoriesResponse.swift in Sources */,
 				11244A5E262D64DC0051310D /* CategoryCollectionViewCell.swift in Sources */,
 				11122E35262E70E9003CF138 /* CategoryViewController.swift in Sources */,
+				1132CCCC26326A50007F7680 /* LibraryAlbumsViewController.swift in Sources */,
 				11893DD22627F7AC008436BF /* AuthResponse.swift in Sources */,
 				112CC98F263148FC00E848D6 /* PlayerControlsView.swift in Sources */,
+				1132CCC926326A1B007F7680 /* LibraryPlaylistsViewController.swift in Sources */,
 				112CC97D263130FE00E848D6 /* PlaybackPresenter.swift in Sources */,
 				11122E43262E9507003CF138 /* SearchResult.swift in Sources */,
 				11C1BBCD262AD24300032FFC /* FeaturedPlaylistsCellViewModel.swift in Sources */,

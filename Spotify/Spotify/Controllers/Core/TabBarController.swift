@@ -18,7 +18,7 @@ class TabBarController: UITabBarController {
         
         vc1.title = "Browse"
         vc2.title = "Search"
-        vc3.title = "Library"
+        vc3.title = "Music"
         
         vc1.navigationItem.largeTitleDisplayMode = .always
         vc2.navigationItem.largeTitleDisplayMode = .always
