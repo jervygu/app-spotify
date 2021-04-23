@@ -21,19 +21,23 @@ final class PlaybackPresenter {
     private var track: AudioTrack?
     private var tracks = [AudioTrack]()
     
+    var index = 0
+    
     var currentTrack: AudioTrack? {
         if let track = track, tracks.isEmpty {
             return track
         } else if let player = self.queuePlayer, !tracks.isEmpty {
-            let item = player.currentItem
-            let items = player.items()
-            guard let index = items.firstIndex(where: { $0 == item }) else {
-                return nil
-            }
+//            let item = player.currentItem
+//            let items = player.items()
+//            guard let index = items.firstIndex(where: { $0 == item }) else {
+//                return nil
+//            }
             return tracks[index]
         }
         return nil
     }
+    
+    var playerVC: PlayerViewController?
     
     var player: AVPlayer?
     var queuePlayer: AVQueuePlayer?
@@ -59,6 +63,7 @@ final class PlaybackPresenter {
         viewController.present(UINavigationController(rootViewController: vc), animated: true) { [weak self] in
             self?.player?.play()
         }
+        self.playerVC = vc
         
     }
     
@@ -81,6 +86,7 @@ final class PlaybackPresenter {
         vc.delegate = self
         
         viewController.present(UINavigationController(rootViewController: vc), animated: true, completion: nil)
+        self.playerVC = vc
     }
 }
 
@@ -112,11 +118,8 @@ extension PlaybackPresenter: PlayerViewControllerDelegate {
             queuePlayer = AVQueuePlayer(items: [firstItem])
             queuePlayer?.play()
             queuePlayer?.volume = 0.5
+            
         }
-        
-//        else if let player = queuePlayer {
-//            player.items()
-//        }
     }
     
     func didTapNextButton() {
@@ -125,7 +128,9 @@ extension PlaybackPresenter: PlayerViewControllerDelegate {
             player?.pause()
         } else if let player = queuePlayer {
             player.advanceToNextItem()
-            
+            index += 1
+            print(index)
+            playerVC?.refreshUI()
         }
     }
     

@@ -22,7 +22,7 @@ class PlayerViewController: UIViewController {
     
     private let imageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .systemBlue
+//        imageView.backgroundColor = .systemBlue
         imageView.layer.masksToBounds = true
         imageView.contentMode = .scaleAspectFill
         
@@ -100,6 +100,10 @@ class PlayerViewController: UIViewController {
     
     @objc private func didTapAction() {
         // actions
+    }
+    
+    func refreshUI() {
+        configure()
     }
 }
 
