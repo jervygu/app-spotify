@@ -30,7 +30,7 @@ class WelcomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
         signInButton.frame = CGRect(
             x: 20,
-            y: view.height-50-view.safeAreaInsets.bottom,
+            y: view.height-50-view.safeAreaInsets.bottom-20,
             width: view.width-40,
             height: 50)
         

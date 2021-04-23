@@ -106,7 +106,7 @@ class LibraryToggleView: UIView {
                 x: 15,
                 y: playlistsButton.height,
                 width: playlistsButton.width-30,
-                height: 3)
+                height: 2)
             
             playlistsButton.setTitleColor(.label, for: .normal)
             albumsButton.setTitleColor(.secondaryLabel, for: .normal)
@@ -115,7 +115,7 @@ class LibraryToggleView: UIView {
                 x: 107,
                 y: albumsButton.height,
                 width: albumsButton.width-34,
-                height: 3)
+                height: 2)
             
             albumsButton.setTitleColor(.label, for: .normal)
             playlistsButton.setTitleColor(.secondaryLabel, for: .normal)

@@ -151,42 +151,42 @@ final class PlayerControlsView: UIView {
         
         titleLabel.frame = CGRect(
             x: 10,
-            y: 30,
+            y: 0,
             width: width-20,
             height: width/10)
 //        titleLabel.backgroundColor = .systemTeal
         
         subTitleLabel.frame = CGRect(
             x: 10,
-            y: titleLabel.height+30,
+            y: titleLabel.height,
             width: width-20,
             height: width/13)
 //        subTitleLabel.backgroundColor = .systemPink
         
         volumeSlider.frame = CGRect(
             x: 5,
-            y: 10+titleLabel.height+10+subTitleLabel.height+30,
+            y: 10+titleLabel.height+10+subTitleLabel.height,
             width: width-10,
             height: 44)
         
         let buttonSize: CGFloat = 60
         playPauseButton.frame = CGRect(
             x: (width-buttonSize)/2,
-            y: (width-buttonSize)/2+30,
+            y: (width-buttonSize)/2,
             width: buttonSize,
             height: buttonSize)
 //        playPauseButton.backgroundColor = .systemPink
         
         backButton.frame = CGRect(
             x: playPauseButton.left-40-buttonSize,
-            y: (width-buttonSize)/2+30,
+            y: (width-buttonSize)/2,
             width: buttonSize,
             height: buttonSize)
 //        backButton.backgroundColor = .systemPink
         
         nextButton.frame = CGRect(
             x: playPauseButton.right+40,
-            y: (width-buttonSize)/2+30,
+            y: (width-buttonSize)/2,
             width: buttonSize,
             height: buttonSize)
 //        nextButton.backgroundColor = .systemPink
