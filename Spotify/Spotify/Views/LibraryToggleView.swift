@@ -88,11 +88,14 @@ class LibraryToggleView: UIView {
             y: 0,
             width: 90,
             height: 40)
+//        playlistsButton.backgroundColor = .systemRed
+        
         albumsButton.frame = CGRect(
             x: playlistsButton.right,
             y: 0,
             width: 90,
             height: 40)
+//        albumsButton.backgroundColor = .systemRed
         
         layoutIndicatorConfig()
         

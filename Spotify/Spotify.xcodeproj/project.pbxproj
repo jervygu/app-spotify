@@ -29,6 +29,7 @@
 		1162B69A2627BF9E00907305 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1162B6992627BF9E00907305 /* HomeViewController.swift */; };
 		1162B69F2627BF9F00907305 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1162B69E2627BF9F00907305 /* Assets.xcassets */; };
 		1162B6A22627BF9F00907305 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1162B6A02627BF9F00907305 /* LaunchScreen.storyboard */; };
+		117B5D00263682B400C4A3B6 /* ActionLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117B5CFF263682B400C4A3B6 /* ActionLabelView.swift */; };
 		118144D4262EBA7500F21A85 /* Album.swift in Sources */ = {isa = PBXBuildFile; fileRef = 118144D3262EBA7500F21A85 /* Album.swift */; };
 		11893D952627C514008436BF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11893D942627C514008436BF /* TabBarController.swift */; };
 		11893D992627C568008436BF /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11893D982627C568008436BF /* SearchViewController.swift */; };
@@ -103,6 +104,7 @@
 		1162B69E2627BF9F00907305 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1162B6A12627BF9F00907305 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1162B6A32627BF9F00907305 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		117B5CFF263682B400C4A3B6 /* ActionLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionLabelView.swift; sourceTree = "<group>"; };
 		118144D3262EBA7500F21A85 /* Album.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Album.swift; sourceTree = "<group>"; };
 		11893D942627C514008436BF /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		11893D982627C568008436BF /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -280,6 +282,7 @@
 				11AE3C49262D1FD2008D3293 /* AlbumTrackCollectionViewCell.swift */,
 				112CC98E263148FC00E848D6 /* PlayerControlsView.swift */,
 				1132CCCE2632714F007F7680 /* LibraryToggleView.swift */,
+				117B5CFF263682B400C4A3B6 /* ActionLabelView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -509,6 +512,7 @@
 				11CEBEEE262963BD00BCD73C /* NewReleasesReponse.swift in Sources */,
 				11893DAC2627C635008436BF /* ProfileViewController.swift in Sources */,
 				11893D952627C514008436BF /* TabBarController.swift in Sources */,
+				117B5D00263682B400C4A3B6 /* ActionLabelView.swift in Sources */,
 				11122E32262E605A003CF138 /* CategoryCollectionViewCellViewModel.swift in Sources */,
 				11AE3C4A262D1FD2008D3293 /* AlbumTrackCollectionViewCell.swift in Sources */,
 				11893DBE2627C6D9008436BF /* HapticsManager.swift in Sources */,
@@ -628,7 +632,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -683,7 +687,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -702,7 +706,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7ZBHT89JPN;
 				INFOPLIST_FILE = Spotify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -723,7 +727,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7ZBHT89JPN;
 				INFOPLIST_FILE = Spotify/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

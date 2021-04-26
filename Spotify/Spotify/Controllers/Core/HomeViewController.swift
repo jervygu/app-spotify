@@ -108,7 +108,9 @@ class HomeViewController: UIViewController {
         var featuredPlaylists: FeaturedPlaylistsReponse?
         var recommedations: RecommendationsResponse?
         
-        var currentUserPlaylists: CurrentUserPlaylistsResponse?
+//        var currentUserPlaylists: CurrentUserPlaylistsResponse?
+        
+        var currentUserPlaylists: [Playlist]?
         
         // New Releases
         APICaller.shared.getNewReleases { (result) in
@@ -181,8 +183,8 @@ class HomeViewController: UIViewController {
             }
 
             switch result {
-            case .success(let model):
-                currentUserPlaylists = model
+            case .success(let playlists):
+                currentUserPlaylists = playlists
             case .failure(let error):
                 print(error.localizedDescription)
                 break
@@ -193,7 +195,7 @@ class HomeViewController: UIViewController {
             guard let newAlbums = newReleases?.albums.items,
                   let playlists = featuredPlaylists?.playlists.items,
                   let tracks = recommedations?.tracks,
-                  let userPlaylists = currentUserPlaylists?.items else {
+                  let userPlaylists = currentUserPlaylists else {
                 return
             }
             
