@@ -183,9 +183,10 @@ class PlaylistHeaderCollectionReusableView: UICollectionReusableView {
         }
         ownerLabel.text = "\(owner) • \(total) \(songTxt)"
         numberOfTracksLabel.text = ""
-        playlistCoverImageView.sd_setImage(with: model.artworkURL, completed: nil)
-        
-        
+        playlistCoverImageView.sd_setImage(
+            with: model.artworkURL,
+            placeholderImage: UIImage(named: "playlistPlaceholder"),
+            completed: nil)
     }
     
 }

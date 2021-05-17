@@ -1,5 +1,5 @@
 //
-//  CatergoryPlaylistCellViewModel.swift
+//  CategoryPlaylistCellViewModel.swift
 //  Spotify
 //
 //  Created by Jeff Umandap on 5/9/21.
