@@ -100,7 +100,9 @@ class HomeViewController: UIViewController {
             title: model.name,
             message: "Would you like to add this to a playlist?",
             preferredStyle: .actionSheet)
+        
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
         actionSheet.addAction(UIAlertAction(title: "Add to Playlist", style: .default, handler: { [weak self] _ in
             DispatchQueue.main.async {
                 let vc = LibraryPlaylistsViewController()

@@ -164,8 +164,6 @@ final class APICaller {
                 do {
                     let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     
-                    print(result)
-                    
                     if let response = result as? [String: Any], response["snapshot_id"] as? String != nil {
                         completion(true)
                     } else {
@@ -182,7 +180,42 @@ final class APICaller {
     }
     
     public func removeTrackFromPlaylist(track: AudioTrack, playlist: Playlist, completion: @escaping(Bool) -> Void) {
-        
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/playlists/\(playlist.id)/tracks"), withType: .DELETE) {
+            baseRequest in
+            var request = baseRequest
+            let json: [String: Any] = [
+                "tracks": [
+                    [
+                        "uri": "spotify:track:\(track.id)"
+                    ]
+                ]
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: json, options: .fragmentsAllowed)
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                guard let data = data, error == nil else {
+                    completion(false)
+                    return
+                }
+                
+                do {
+                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    
+                    print(result)
+                    
+                    if let response = result as? [String: Any], response["snapshot_id"] as? String != nil {
+                        completion(true)
+                    } else {
+                        completion(false)
+                    }
+                    
+                } catch {
+                    completion(false)
+                }
+            }
+            task.resume()
+        }
     }
 
 
@@ -437,6 +470,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
     enum HTTPMethod: String {
         case GET
         case POST
+        case DELETE
     }
     
     private func createRequest(withUrl url: URL?,
