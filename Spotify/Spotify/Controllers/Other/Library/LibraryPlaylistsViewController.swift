@@ -111,7 +111,7 @@ class LibraryPlaylistsViewController: UIViewController {
             APICaller.shared.createPlaylist(withName: text) { (success) in
                 if success {
                     //  refresh list of playlist
-                    
+                    self.fetchData()
                 } else {
                     print("Failed to create playlist.")
                 }
