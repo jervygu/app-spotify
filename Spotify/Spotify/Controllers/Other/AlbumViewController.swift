@@ -89,6 +89,33 @@ class AlbumViewController: UIViewController {
         collectionView.backgroundColor = .systemBackground
         collectionView.showsVerticalScrollIndicator = false
         
+        fetchData()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .save,
+            target: self,
+            action: #selector(didTapActions))
+        
+    }
+    
+    @objc private func didTapActions(){
+        let actionSheet = UIAlertController(title: album.name, message: "Actions", preferredStyle: .actionSheet)
+        
+        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        actionSheet.addAction(UIAlertAction(title: "Save Album", style: .default, handler: { [weak self] ( _ ) in
+            guard let strongSelf = self else { return }
+            APICaller.shared.saveAlbum(album: strongSelf.album) { (success) in
+//                print("Saved: \(success)")
+                if success {
+                    NotificationCenter.default.post(name: .albumSavedNotification, object: nil)
+                }
+            }
+        }))
+        
+        present(actionSheet, animated: true, completion: nil)
+    }
+    
+    func fetchData() {
         APICaller.shared.getAlbumDetails(forAlbum: album) { [weak self](result) in
             DispatchQueue.main.async {
                 switch result {
@@ -114,29 +141,7 @@ class AlbumViewController: UIViewController {
                 }
             }
         }
-        
-                navigationItem.rightBarButtonItem = UIBarButtonItem(
-                    barButtonSystemItem: .action,
-                    target: self,
-                    action: #selector(didTapShareButton))
-        
     }
-    
-    
-    @objc private func didTapShareButton(){
-        // share
-        print("Share album: \(album.external_urls)")
-        guard let url = URL(string: album.external_urls["spotify"] ?? "") else {
-            return
-        }
-    
-        let vc = UIActivityViewController(
-            activityItems: [url],
-            applicationActivities: [])
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        present(vc, animated: true, completion: nil)
-    }
-    
     
     
     override func viewDidLayoutSubviews() {

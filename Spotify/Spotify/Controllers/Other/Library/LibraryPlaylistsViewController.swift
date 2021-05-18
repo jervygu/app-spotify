@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LibraryPlaylistsViewController: UIViewController {
+class LibraryPlaylistsViewController: UIViewController { 
     
     var playlists = [Playlist]()
     

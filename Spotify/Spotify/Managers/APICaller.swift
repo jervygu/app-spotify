@@ -22,7 +22,7 @@ final class APICaller {
     
     // MARK: -  Albums Details
     
-    func getAlbumDetails(forAlbum album: Album, completion: @escaping(Result<AlbumDetailsResponse, Error>) -> Void) {
+    public func getAlbumDetails(forAlbum album: Album, completion: @escaping(Result<AlbumDetailsResponse, Error>) -> Void) {
         createRequest(
             withUrl: URL(string: Constants.baseAPIUrl + "/albums/" + album.id),
             withType: .GET) { (request) in
@@ -45,10 +45,50 @@ final class APICaller {
         }
     }
     
+    public func getCurrentUserAlbums(completion: @escaping (Result<[Album], Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me/albums"), withType: .GET) { (request) in
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData)) 
+                    return
+                }
+                do {
+//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    let result = try JSONDecoder().decode(CurrentUserAlbumsResponse.self, from: data)
+//                    print(result)
+                    completion(.success(result.items.compactMap({ $0.album })))
+                } catch {
+//                    print(error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    public func saveAlbum(album: Album, completion: @escaping(Bool) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me/albums?ids=\(album.id)"), withType: .PUT) { (baseRequest) in
+            var request = baseRequest
+            
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                guard let code = (response as? HTTPURLResponse)?.statusCode,
+                      error == nil else {
+                    completion(false)
+                    return
+                }
+                print(code)
+                completion(code == 200)
+            }
+            task.resume()
+        }
+    }
+    
     
     // MARK: -  Playlists Details
     
-    func getPlaylistDetails(withPlaylist playlist: Playlist, completion: @escaping(Result<PlaylistDetailsResponse, Error>) -> Void) {
+    public func getPlaylistDetails(withPlaylist playlist: Playlist, completion: @escaping(Result<PlaylistDetailsResponse, Error>) -> Void) {
         createRequest(
             withUrl: URL(string: Constants.baseAPIUrl + "/playlists/" + playlist.id),
             withType: .GET) { (request) in
@@ -227,47 +267,47 @@ final class APICaller {
 
 
 
-// MARK: - PROFILE
-
-public func getCurrentUserProfile(completion: @escaping(Result<UserProfile, Error>) -> Void) {
-    createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me"),
-                  withType: .GET
-    ){ (baseRequest) in
-        let task = URLSession.shared.dataTask(with: baseRequest) { (data, response, error) in
-            guard let data = data, error == nil else {
-                completion(.failure(APIError.failedToGetData))
-                return
-            }
-            do {
-                //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
-                let result = try JSONDecoder().decode(UserProfile.self, from: data)
-                //                    print(result)
-                completion(.success(result))
-            } catch {
-                print("UserProfile: \(error.localizedDescription)")
-                completion(.failure(error))
-            }
-        }
-        task.resume()
-    }
-}
-
-
-// MARK:- CurrentUser Following
-
-public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingArtistsResponse, Error>) -> Void) {
-    createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me/following?type=artist&limit=20"),
-                  withType: .GET
-    ){ (baseRequest) in
-        let task = URLSession.shared.dataTask(with: baseRequest) { (data, response, error) in
+    // MARK: - PROFILE
+    
+    public func getCurrentUserProfile(completion: @escaping(Result<UserProfile, Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me"),
+                      withType: .GET
+        ){ (baseRequest) in
+            let task = URLSession.shared.dataTask(with: baseRequest) { (data, response, error) in
                 guard let data = data, error == nil else {
                     completion(.failure(APIError.failedToGetData))
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    let result = try JSONDecoder().decode(UserProfile.self, from: data)
+                    //                    print(result)
+                    completion(.success(result))
+                } catch {
+                    print("UserProfile: \(error.localizedDescription)")
+                    completion(.failure(error))
+                }
+            }
+            task.resume()
+        }
+    }
+    
+    
+    // MARK:- CurrentUser Following
+    
+    public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingArtistsResponse, Error>) -> Void) {
+        createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/me/following?type=artist&limit=20"),
+                      withType: .GET
+        ){ (baseRequest) in
+            let task = URLSession.shared.dataTask(with: baseRequest) { (data, response, error) in
+                guard let data = data, error == nil else {
+                    completion(.failure(APIError.failedToGetData))
+                    return
+                }
+                do {
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(UserFollowingArtistsResponse.self, from: data)
-//                    print(result)
+                    //                    print(result)
                     completion(.success(result))
                 } catch {
                     print("UserFollowingResponse: \(error.localizedDescription)")
@@ -288,9 +328,9 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(NewReleasesReponse.self, from: data)
-//                    print(result)
+                    //                    print(result)
                     completion(.success(result))
                 } catch {
                     print("NewReleasesReponse: \(error.localizedDescription)")
@@ -311,9 +351,9 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(FeaturedPlaylistsReponse.self, from: data)
-//                    print(result)
+                    //                    print(result)
                     completion(.success(result))
                 } catch {
                     print("FeaturedPlaylistsReponse: \(error.localizedDescription)")
@@ -333,7 +373,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
         
         createRequest(withUrl: URL(string: Constants.baseAPIUrl + "/recommendations?seed_genres=\(seeds)&limit=10&country=PH"), withType: .GET) { (request) in
             
-//            print(request.url?.absoluteString as Any)
+            //            print(request.url?.absoluteString as Any)
             
             let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
                 guard let data = data, error == nil else {
@@ -341,9 +381,9 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(RecommendationsResponse.self, from: data)
-//                    print(result)
+                    //                    print(result)
                     completion(.success(result))
                 } catch {
                     print("getRecommendations: \(error.localizedDescription)")
@@ -365,9 +405,9 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(RecommendationGenresResponse.self, from: data)
-//                    print(result)
+                    //                    print(result)
                     completion(.success(result))
                 } catch {
                     completion(.failure(error))
@@ -390,7 +430,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerializatio n.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerializatio n.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(AllCategoriesResponse.self, from: data)
                     print(result.categories.items)
                     completion(.success(result.categories.items))
@@ -411,7 +451,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(CategorysPlaylistsResponse.self, from: data)
                     let playlists = result.playlists.items
                     print(playlists)
@@ -442,7 +482,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
                     return
                 }
                 do {
-//                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
+                    //                    let result = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                     let result = try JSONDecoder().decode(SearchResultResponse.self, from: data)
                     var searchResults: [SearchResult] = []
                     
@@ -470,6 +510,7 @@ public func getCurrentUserFollowing(completion: @escaping(Result<UserFollowingAr
     enum HTTPMethod: String {
         case GET
         case POST
+        case PUT
         case DELETE
     }
     

@@ -79,3 +79,7 @@ extension String {
       self = self.capitalizingFirstLetter()
     }
 }
+
+extension Notification.Name {
+    static let albumSavedNotification = Notification.Name("albumSavedNotification")
+}
