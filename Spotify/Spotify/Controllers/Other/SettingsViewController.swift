@@ -58,7 +58,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
                 title: "Cancel",
                 style: .cancel,
                 handler: nil))
-        alert.addAction(UIAlertAction(title: "Log out", style: .default, handler: { (_) in
+        
+        alert.addAction(UIAlertAction(title: "Log out", style: .destructive, handler: { (_) in
             AuthManager.shared.signOut { [weak self] (signedOut) in
                 if signedOut {
                     DispatchQueue.main.async {
