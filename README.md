@@ -24,7 +24,7 @@ A music player app in Swift 5 using the Spotify web Api.
 ## Screenshots
 
 
-| Sign In | Browse | New Releases| Save Album | 
+| Sign In | Browse | New Released Album| Save Album | 
 | --- | --- | --- | --- | 
 | ![](https://github.com/jervygu/app-spotify/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%20a.png) | ![](https://github.com/jervygu/app-spotify/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%20b.png) | ![](https://github.com/jervygu/app-spotify/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%20c.png) | ![](https://github.com/jervygu/app-spotify/blob/master/screenshots/Simulator%20Screen%20Shot%20-%20iPhone%208%20-%20d.png) |
 
