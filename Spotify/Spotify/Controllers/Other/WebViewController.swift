@@ -7,12 +7,13 @@
 
 import UIKit
 import WebKit
+
 class WebViewController: UIViewController, WKUIDelegate {
     
     var webView: WKWebView!
     
     var artistURL: URL? = nil
-    
+     
     override func loadView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)

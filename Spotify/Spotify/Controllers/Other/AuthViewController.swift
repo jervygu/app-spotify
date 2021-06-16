@@ -12,7 +12,11 @@ class AuthViewController: UIViewController, WKNavigationDelegate {
     
     private let webView: WKWebView = {
         let prefs = WKWebpagePreferences()
-        prefs.allowsContentJavaScript = true
+        if #available(iOS 14.0, *) {
+            prefs.allowsContentJavaScript = true
+        } else {
+            // Fallback on earlier versions
+        }
         let config = WKWebViewConfiguration()
         config.defaultWebpagePreferences = prefs
         let webView = WKWebView(frame: .zero, configuration: config)

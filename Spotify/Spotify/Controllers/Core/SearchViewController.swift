@@ -152,7 +152,7 @@ extension SearchViewController: SearchResultsViewControllerDelegate {
             let vc = WebViewController()
             vc.artistURL = url
 //            present(vc, animated: true, completion: nil)
-            vc.navigationItem.largeTitleDisplayMode =  .never
+            vc.navigationItem.largeTitleDisplayMode = .never
             vc.title = model.name
             navigationController?.pushViewController(vc, animated: true)
             

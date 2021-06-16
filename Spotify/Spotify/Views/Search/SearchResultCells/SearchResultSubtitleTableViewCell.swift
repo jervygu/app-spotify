@@ -92,12 +92,11 @@ class SearchResultSubtitleTableViewCell: UITableViewCell {
     func configure(withViewModel viewModel: SearchResultSubtitleTableViewCellViewModel) {
         label.text = viewModel.title
         subTitlelabel.text = viewModel.subTitle
+        
         iconImageView.sd_setImage(
             with: viewModel.imageURL,
             placeholderImage: UIImage(named: "playlistPlaceholder"),
             completed: nil)
-        
-        
     }
     
 }
