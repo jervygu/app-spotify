@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-Spotify/Pods-Spotify-frameworks.sh
-${BUILT_PRODUCTS_DIR}/Appirater/Appirater.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCore/FirebaseCore.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseCoreDiagnostics/FirebaseCoreDiagnostics.framework
 ${BUILT_PRODUCTS_DIR}/FirebaseInstallations/FirebaseInstallations.framework

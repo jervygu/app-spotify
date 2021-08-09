@@ -19,7 +19,6 @@ A music player app in Swift 5 using the Spotify web Api.
 
 ## Dependencies
 - SDWebImage
-- Appirater
 
 ## Screenshots
 

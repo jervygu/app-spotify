@@ -7,7 +7,7 @@ target 'Spotify' do
 
   # Pods for Spotify
   pod 'SDWebImage'
-  pod 'Appirater'
+#  pod 'Appirater'
   pod 'Firebase/Analytics'
 
 end
